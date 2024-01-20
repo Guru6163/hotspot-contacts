@@ -66,7 +66,8 @@ export default function ContactsTable() {
                 <Column sortable field="id" header="Contact ID"></Column>
                 <Column body={nameBodyTemplate} header="Name"></Column>
                 <Column field="phoneNumber" header="Phone Number"></Column>
-                <Column field="enquiry" header="Requirements"></Column>
+                <Column field="requirements" header="Requirements"></Column>
+                <Column field="fulfilled" header="Fulfillment"></Column>
             </DataTable>
             <AddModalContact visible={visible} setVisible={setVisible} update={update} setUpdate={setUpdate} />
         </div>

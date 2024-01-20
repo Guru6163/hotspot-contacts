@@ -11,7 +11,7 @@ import contactService from "../services/api"
 const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     phoneNumber: Yup.string().required("Phone Number is required").min(10, "Phone Number must have at least 10 characters").max(10, "Phone Number must have max of 10 characters"),
-    enquiry: Yup.string(),
+    requirements: Yup.string(),
 });
 
 export default function AddModalContact({ visible, setVisible, update, setUpdate }) {
@@ -19,7 +19,7 @@ export default function AddModalContact({ visible, setVisible, update, setUpdate
         initialValues: {
             name: "",
             phoneNumber: "",
-            enquiry: "",
+            requirements: "",
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
@@ -27,7 +27,7 @@ export default function AddModalContact({ visible, setVisible, update, setUpdate
                 const result = await contactService.addOrUpdateContact(
                     values.name,
                     values.phoneNumber,
-                    values.enquiry
+                    values.requirements
                 );
                 console.log(result);
                 formik.resetForm();
@@ -91,16 +91,16 @@ export default function AddModalContact({ visible, setVisible, update, setUpdate
                         <div className="p-inputgroup flex-1">
                             <span className="p-inputgroup-addon">!</span>
                             <InputText
-                                id="enquiry"
-                                name="enquiry"
+                                id="requirements"
+                                name="requirements"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.enquiry}
+                                value={formik.values.requirements}
                                 className="p-inputtext-lg"
                                 placeholder="Any Requirements?"
                             />
                         </div>
-                        <small className="p-error">{formik.touched.enquiry && formik.errors.enquiry}</small>
+                        <small className="p-error">{formik.touched.requirements && formik.errors.requirements}</small>
                     </div>
                 </form>
             </Dialog>

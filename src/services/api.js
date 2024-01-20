@@ -2,11 +2,13 @@
 import { db } from '../config/firebaseConfig';
 import { collection, getDocs, query, where, updateDoc, doc, setDoc, orderBy } from '@firebase/firestore';
 
-const addOrUpdateContact = async (name, phoneNumber, enquiry) => {
+const addOrUpdateContact = async (name, phoneNumber, requirements) => {
     try {
         // Check if there are existing contacts
         const allContactsQuery = query(collection(db, 'contacts'));
         const allContactsSnapshot = await getDocs(allContactsQuery);
+
+        
 
         let contactId;
         if (allContactsSnapshot.size === 0) {
@@ -24,6 +26,7 @@ const addOrUpdateContact = async (name, phoneNumber, enquiry) => {
 
         const timestamp = new Date(); // Current timestamp
 
+        let fulfilledStatus = requirements.length > 0 ? 'Pending' : 'None';
         // Check if the phoneNumber exists
         const contactQuery = query(collection(db, 'contacts'), where('phoneNumber', '==', phoneNumber));
         const contactSnapshot = await getDocs(contactQuery);
@@ -35,8 +38,9 @@ const addOrUpdateContact = async (name, phoneNumber, enquiry) => {
                 // Exclude the ID field from the data being updated
                 name: `${contactDoc.id}-${name}`,
                 phoneNumber,
-                enquiry,
+                requirements,
                 createdAt: timestamp, // Add createdAt field
+                fulfilled: fulfilledStatus, // Update fulfilled status
             });
 
             return { message: 'Contact updated successfully.' };
@@ -46,8 +50,9 @@ const addOrUpdateContact = async (name, phoneNumber, enquiry) => {
                 id: contactId, // Include the ID in the document data
                 name: `${contactId}-${name}`,
                 phoneNumber,
-                enquiry,
+                requirements,
                 createdAt: timestamp, // Add createdAt field
+                fulfilled: fulfilledStatus, 
             });
 
             return { message: 'Contact added successfully.', contactId };
