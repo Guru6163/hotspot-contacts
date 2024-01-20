@@ -29,7 +29,6 @@ export default function AddModalContact({ visible, setVisible, update, setUpdate
                     values.phoneNumber,
                     values.requirements
                 );
-                console.log(result);
                 formik.resetForm();
                 setUpdate(!update)
                 setVisible(false);

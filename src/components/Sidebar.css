@@ -1,0 +1,21 @@
+/* src/components/Sidebar.css */
+.sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background-color: #dee2e6;
+  }
+  
+  
+
+  .button-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 30px; /* Adjust the margin as needed */
+  }

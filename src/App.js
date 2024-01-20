@@ -1,16 +1,18 @@
 import ContactsTable from "./components/ContactsTable";
-import Icon from "./assets/icon.svg";
 import "./App.css"
+import { Routes, Route } from "react-router-dom"
+import Admin from "./pages/Admin";
+
+
 
 function App() {
   return (
-    <div className="text-center">
-       <div className="cropped-image-container">
-        <img style={{width:"400px"}} alt="Hotspot Updates" src={Icon} />
-      </div>
-    
-      <ContactsTable />
-
+    <div className="">
+      <Routes>
+        <Route path="/" element={<ContactsTable />} />
+        <Route path="admin" element={<Admin />} />
+      </Routes>
+      
     </div>
   );
 }
