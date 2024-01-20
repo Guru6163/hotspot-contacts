@@ -5,9 +5,10 @@ import { Button } from 'primereact/button';
 import AddModalContact from './AddContactModal';
 import { useLocation } from "react-router-dom"
 import contactService from '../services/api';
+import Icon from "../assets/icon.svg"
 
 export default function ContactsTable(props) {
-    
+
     const [visible, setVisible] = useState(false);
     const [update, setUpdate] = useState(false);
     const { filteredContacts, setContacts, setFilteredContacts } = props
@@ -32,7 +33,7 @@ export default function ContactsTable(props) {
 
     useEffect(() => {
         if (location.pathname !== '/admin') {
-            setNewSize("p-7")
+            setNewSize("px-7")
             contactService.getLast20Collections().then(res => setNonAuthContacts(res))
         }
     }, [location])
@@ -63,6 +64,7 @@ export default function ContactsTable(props) {
 
     return (
         <div className={`card ${newSize}`}>
+            {newSize && <div className='text-center mt-2'> <img style={{ width: "300px" }} alt='' src={Icon} /></div>}
             <DataTable
                 header={header}
                 selectionMode={true ? null : 'radiobutton'}
@@ -71,7 +73,7 @@ export default function ContactsTable(props) {
                 rows={5}
                 rowsPerPageOptions={[10, 25, 50]}
                 size="medium"
-                value={newSize === 'p-7' ? nonAuthContacts : filteredContacts}
+                value={newSize === 'px-7' ? nonAuthContacts : filteredContacts}
                 showGridlines
             >
                 <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>

@@ -8,11 +8,7 @@ function Admin() {
     const [keyword, setKeyword] = useState('');
     const [contacts, setContacts] = useState([]);
     
-    
     const [filteredContacts, setFilteredContacts] = useState([]);
-
-
-
 
     return (
         <div>
